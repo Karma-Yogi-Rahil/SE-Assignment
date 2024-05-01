@@ -1,17 +1,15 @@
+package View;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class GameView {
-
-
     private JFrame frame;
     private JButton[][] buttons ;
     private JTextArea playerDisplay;
 
-
-    private GameView(){
+    public GameView() {
         buttons = new JButton[3][3];
         frame = new JFrame("Tic Tac Toe");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,8 +31,22 @@ public class GameView {
         }
 
         frame.setVisible(true);
-
     }
 
+    public void setButtonListener(ActionListener listener) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                buttons[i][j].addActionListener(listener);
+            }
+        }
+    }
+
+    public JButton[][] getButtons() {
+        return buttons;
+    }
+
+    public void updatePlayerDisplay(String text) {
+        playerDisplay.setText(text);
+    }
 
 }
