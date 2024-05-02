@@ -3,29 +3,34 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import Config.ConfigLoader;  // Ensure you have the ConfigLoader class
 
 public class GameView {
     private JFrame frame;
-    private JButton[][] buttons ;
+    private JButton[][] buttons;
     private JTextArea playerDisplay;
+    private int gridSize;  // Dynamic grid size
 
     public GameView() {
-        buttons = new JButton[3][3];
+        // Load grid size from configuration file
+        gridSize = ConfigLoader.getIntProperty("grid.size");
+
+        buttons = new JButton[gridSize][gridSize];
         frame = new JFrame("Tic Tac Toe");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(new Dimension(300, 300));
+        frame.setSize(100 * gridSize, 100 * gridSize + 50);  // Adjust frame size based on grid size
         frame.setLayout(new BorderLayout());
 
-        JPanel boardPanel = new JPanel(new GridLayout(3, 3));
+        JPanel boardPanel = new JPanel(new GridLayout(gridSize, gridSize));
         frame.add(boardPanel, BorderLayout.CENTER);
 
         playerDisplay = new JTextArea();
         frame.add(playerDisplay, BorderLayout.SOUTH);
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < gridSize; i++) {
+            for (int j = 0; j < gridSize; j++) {
                 buttons[i][j] = new JButton();
-                buttons[i][j].setPreferredSize(new Dimension(100, 100));
+                buttons[i][j].setPreferredSize(new Dimension(100, 100));  // Standard button size
                 boardPanel.add(buttons[i][j]);
             }
         }
@@ -34,8 +39,8 @@ public class GameView {
     }
 
     public void setButtonListener(ActionListener listener) {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < gridSize; i++) {
+            for (int j = 0; j < gridSize; j++) {
                 buttons[i][j].addActionListener(listener);
             }
         }
