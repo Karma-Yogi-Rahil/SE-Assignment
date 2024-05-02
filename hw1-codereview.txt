@@ -1,0 +1,22 @@
+Rahil Mehta 
+
+Violation 1: Lack of Separation of Concerns
+Brief Summary:: Integration of UI, game logic, and input handling in a single class.
+What’s the Issue: The TicTacToe class handles user interface components, game logic, and event handling, which complicates code maintenance and makes unit testing challenging.
+How to Fix: Refactor the code using the MVC ,Model-View-ViewModel architecture:
+
+
+Violation 2: Hardcoding
+Brief Summary: Hardcoded game board size and player symbols.
+What’s the Issue: The game board dimensions and player symbols ('X' and 'O') are hardcoded in the logic, reducing flexibility for modifications like changing board size or symbol.
+How to Fix: Define these values as constants or configurable parameters, allowing easy adjustments and making the code more generalizable.
+
+Violation 3: Code Duplication
+Brief Summary: Repetitive code in event handling.
+What’s the Issue: The action listener method contains repetitive code for each button to check win conditions and update the UI, leading to a higher risk of errors and difficulties in making changes.
+How to Fix: Create separate methods to handle win conditions and UI updates, then call these methods within the action listeners to reduce duplication and improve clarity.
+
+Violation 4: Improper Encapsulation
+Brief Summary: Public access to UI components and game state variables.
+What’s the Issue: UI components like blocks and game state variables such as player and movesLeft are publicly accessible, which violates the encapsulation principle of object-oriented design, can lead to unintended modifications from outside the class(a security risk).
+How to Fix: Change the visibility of these components and variables to private and provide public methods for necessary interactions (e.g., getPlayer(), setPlayer(int player), etc.).
